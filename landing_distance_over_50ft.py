@@ -11,17 +11,9 @@ def step_two(res, weight):
 
 def step_three(res, wind):
     if wind > 0:
-        # Guess of 1.25% decrease per 1kt of headwind
-        # return res * (1 - ((1.25 * wind) / 100))
-
-        # Quadratic fit
-        # return ((7E-06 * pow(res, 2)) - (0.029 * res) + 10.302) * wind + res
-
-        # Logarithmic fit
-        return (-9.839 * math.log(res) + 53.725) * wind + res
+        return ((7E-06 * pow(res, 2)) - (0.029 * res) + 10.302) * wind + res
     elif wind < 0:
-        # Logarithmic fit
-        return (45.415 * math.log(res) - 271.87) * abs(wind) + res
+        return res - ((-9E-06 * pow(res, 2)) + (0.0581 * res) - 6.3043) * wind
     else:
         return res
 
