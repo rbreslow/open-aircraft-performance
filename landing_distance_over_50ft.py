@@ -16,6 +16,9 @@ def step_two(res, weight):
     # TODO: Explain why we think this ratio makes sense. Also, Leijurv is based.
     return ((1.0/3000) * res - 0.3) * weight + 900
 
+def vappr(weight):
+    return round(-2E-06 * pow(weight, 2) + 0.023 * weight + 21)
+
 def step_three(res, wind):
     if wind > 0:
         return ((7E-06 * pow(res, 2)) - (0.029 * res) + 10.302) * wind + res
@@ -29,12 +32,11 @@ def landing_distance_over_50ft(palt, oat, weight, wind):
     two = step_two(one, weight)
     three = step_three(two, wind)
 
-    print(f"\nStep One: { one }")
-    print(f"Step Two: { two }")
-    print(f"Step Three: { three }")
+    # print(f"\nStep One: { one }")
+    # print(f"Step Two: { two }")
+    # print(f"Step Three: { three }")
 
-    return three
-
+    return round(three)
 
 if __name__ == "__main__":
     palt = int(input("Landing pressure altitude: "))
@@ -43,4 +45,6 @@ if __name__ == "__main__":
     wind = int(input("Surface wind: "))
 
     distance = landing_distance_over_50ft(palt, oat, weight, wind)
-    print(f"\nTotal Distance Over 50 ft. Barrier (Standard Brakes): {round(distance):,}'")
+
+    print(f"\nApproach Speed: {vappr(weight):} kias")
+    print(f"Landing Distance Over 50 ft. Barrier (Flaps 40°): {distance:,}'")
