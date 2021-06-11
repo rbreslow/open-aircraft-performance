@@ -2,7 +2,9 @@
 
 This repository contains a growing collection of models I am developing from Piper and Lycoming performance charts.
 
-![](pa-32rt-300/indicated_airspeed_vs_percent_power.png)
+<p align="center">
+  <img src="pa-28-236/pressure_altitude_vs_calibrated_airspeed_65%25_power.png" height="384vh" />
+</p>
 
 ## Goals
 
