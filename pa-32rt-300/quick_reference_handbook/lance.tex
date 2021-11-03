@@ -1,0 +1,96 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+    \geometry{
+        a5paper,
+        portrait,
+        % This appears to be close to the margin on a Jeppesen plate. We
+        % should account for holes for the 7-ring binder in the future.
+        margin=0.2in,
+        includehead,
+        includefoot
+    }
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+% NASA says:
+% > The horizontal spacing between characters should be 25% of the
+% > overall size and not less than one stroke width.
+%
+% The microtype documentation says:
+% > Letterspaced fonts for which settings don’t exist will be spaced out
+% > by the default of 0.1 em [...]
+% AND
+% > The amount is specified in thousandths of 1 em [...]
+%
+% So, we're scaling the default spacing by 25%, and then converting to
+% housandths of an em.
+\usepackage[letterspace=125]{microtype}
+\usepackage{titlesec}
+
+\titleformat*{\subsection}{}
+
+% This is the box that surrounds the checklist items.
+\newtcolorbox{checklist}[1]{
+    colback=white,
+    colframe=black,
+    fonttitle=\centering\bfseries,
+    adjusted title={#1},
+    sharpish corners
+}
+
+\newtcolorbox{checklist_emerg}[1]{
+    coltitle=red!25!black,
+    colback=white,
+    colframe=red!75,
+    fonttitle=\centering\bfseries,
+    adjusted title={#1},
+    sharpish corners
+}
+
+% This is a macro that formats the checklist items and adds a new line.
+\def\checkitem#1#2{
+    #1\dotfill#2
+
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{PA-32RT-300, Lance II}
+\fancyfoot[R]{\thepage}
+
+% Set the default font family to sans-serif.
+\renewcommand{\familydefault}{\sfdefault}
+
+% NASA says:
+% > The vertical spacing between lines should not be smaller than 25-33%
+% > of the overall size of the font.
+\renewcommand{\baselinestretch}{1.25}
+
+\title{
+    Quick Reference Handbook
+    \\
+    PA-32RT-300, Lance II
+}
+\date{\today}
+\author{
+    Rocky Breslow
+    \\
+    Delaware Valley Aviation
+}
+
+\begin{document}
+
+% Apply microtype tracking adjustments.
+\lsstyle
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\tableofcontents
+
+\include{lance.normal_procedures.tex}
+\include{lance.emergency_procedures.tex}
+
+\end{document}
