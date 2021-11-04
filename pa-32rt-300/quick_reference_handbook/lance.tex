@@ -1,17 +1,19 @@
 \documentclass{article}
-\usepackage[utf8]{inputenc}
 \usepackage{geometry}
     \geometry{
         a5paper,
         portrait,
-        % This appears to be close to the margin on a Jeppesen plate. We
-        % should account for holes for the 7-ring binder in the future.
-        margin=0.2in,
+        % The Jeppesen plate appears to be closer to 0.25in. I think
+        % that 0.5in is looking best for checklists.
+        margin=0.5in,
+        % I decided arbitrarily on these values to maximize margins,
+        % headers, and content in one page (and satisfy fancyhdr).
+        % https://tex.stackexchange.com/questions/132170/what-do-headheight-headsep-etc-do-in-the-vmargin-package
+        headsep=12pt,
+        footskip=12pt,
         includehead,
         includefoot
     }
-\usepackage{tcolorbox}
-\usepackage{fancyhdr}
 % NASA says:
 % > The horizontal spacing between characters should be 25% of the
 % > overall size and not less than one stroke width.
@@ -23,11 +25,16 @@
 % > The amount is specified in thousandths of 1 em [...]
 %
 % So, we're scaling the default spacing by 25%, and then converting to
-% housandths of an em.
-\usepackage[letterspace=125]{microtype}
-\usepackage{titlesec}
-
-\titleformat*{\subsection}{}
+% housandths of an em (0.1 * 1000 * .25).
+\usepackage[letterspace=25]{microtype}
+% Used for the checklist frames.
+\usepackage{tcolorbox}
+% For the preflight checklist square.
+\usepackage{amssymb}
+% For finer control over multi-column layouts.
+\usepackage{multicol}
+% For finer control over headers and footers.
+\usepackage{fancyhdr}
 
 % This is the box that surrounds the checklist items.
 \newtcolorbox{checklist}[1]{
@@ -53,11 +60,10 @@
 
 }
 
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\leftmark}
-\fancyhead[R]{PA-32RT-300, Lance II}
-\fancyfoot[R]{\thepage}
+% This is a macro to assist in the preflight checklist.
+\def\todoitem#1{
+    \item[$\square$] #1 \dotfill
+}
 
 % Set the default font family to sans-serif.
 \renewcommand{\familydefault}{\sfdefault}
@@ -67,28 +73,22 @@
 % > of the overall size of the font.
 \renewcommand{\baselinestretch}{1.25}
 
-\title{
-    Quick Reference Handbook
-    \\
-    PA-32RT-300, Lance II
-}
-\date{\today}
-\author{
-    Rocky Breslow
-    \\
-    Delaware Valley Aviation
-}
+% Configure the header and footer.
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Quick Reference Handbook}
+\rhead{PA-32RT-300, Lance II}
+\rfoot{\thepage}
 
 \begin{document}
 
 % Apply microtype tracking adjustments.
 \lsstyle
 
-\begin{titlepage}
-    \maketitle
-\end{titlepage}
-
-\tableofcontents
+% [...] you can say \raggedcolumns if you don’t want the bottom lines to
+% be aligned. The default is \flushcolumns, so TEX will normally try to
+% make both the top and bottom baselines of all columns align.
+\raggedcolumns
 
 \include{lance.preflight_checklist.tex}
 \include{lance.normal_procedures.tex}
