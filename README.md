@@ -3,7 +3,7 @@
 This repository contains a growing collection of models I am developing from Piper and Lycoming performance charts.
 
 <p align="center">
-  <img src="pa-28-236/pressure_altitude_vs_calibrated_airspeed_65%25_power.png" height="384vh" />
+  <img src="pa-32rt-300/example.png" height="384vh" />
 </p>
 
 ## Goals
