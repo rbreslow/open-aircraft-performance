@@ -36,33 +36,10 @@
 % For finer control over headers and footers.
 \usepackage{fancyhdr}
 
-% This is the box that surrounds the checklist items.
-\newtcolorbox{checklist}[1]{
-    colback=white,
-    colframe=black,
-    fonttitle=\centering\bfseries,
-    adjusted title={#1},
-    sharpish corners
-}
-
-\newtcolorbox{checklist_emerg}[1]{
-    coltitle=red!25!black,
-    colback=white,
-    colframe=red!75,
-    fonttitle=\centering\bfseries,
-    adjusted title={#1},
-    sharpish corners
-}
-
 % This is a macro that formats the checklist items and adds a new line.
 \def\checkitem#1#2{
     #1\dotfill#2
 
-}
-
-% This is a macro to assist in the preflight checklist.
-\def\todoitem#1{
-    \item[$\square$] #1 \dotfill
 }
 
 % Set the default font family to sans-serif.
